@@ -1,101 +1,161 @@
-import Image from "next/image";
+'use client';
+
+import Head from 'next/head'
+import { useState, useEffect } from 'react'
+import DesktopIcon from '../../components/DesktopIcon'
+import Window from '../../components/Window'
+import StockContent from '../../components/StockContent'
+import NewsContent from '../../components/NewsContent'
 
 export default function Home() {
-  return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-      <main className="flex flex-col gap-8 row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="list-inside list-decimal text-sm text-center sm:text-left font-[family-name:var(--font-geist-mono)]">
-          <li className="mb-2">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] px-1 py-0.5 rounded font-semibold">
-              src/app/page.js
-            </code>
-            .
-          </li>
-          <li>Save and see your changes instantly.</li>
-        </ol>
+  const [activeWindow, setActiveWindow] = useState(null)
+  const [currentTime, setCurrentTime] = useState('')
+  const [showPopup, setShowPopup] = useState(false)
+  const [showInstallWindow, setShowInstallWindow] = useState(false)
+  
+  useEffect(() => {
+    setShowPopup(true)
 
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
+    const timer = setInterval(() => {
+      const now = new Date();
+      const time = now.toLocaleTimeString('en-US', {
+        timeZone: 'America/New_York',
+        hour: '2-digit',
+        minute: '2-digit'
+      });
+      const date = now.toLocaleDateString('en-US', {
+        timeZone: 'America/New_York',
+        month: '2-digit',
+        day: '2-digit',
+        year: '2-digit'
+      });
+      setCurrentTime(`${date} ${time}`);
+    }, 1000);
+
+    return () => clearInterval(timer);
+  }, []);
+
+  const stockTickers = [
+    { symbol: 'OSD', price: '173.50', change: '+69%' },
+    { symbol: 'GFH', price: '402.75', change: '-69%' },
+    { symbol: 'CDS', price: '142.25', change: '+420%' },
+    { symbol: 'SDH', price: '178.90', change: '+96%' },
+    { symbol: 'YUI', price: '185.30', change: '-420%' },
+    { symbol: 'GJG', price: '142.25', change: '+690%' },
+    { symbol: 'YTRE', price: '178.90', change: '+96%' },
+    { symbol: 'UIY', price: '185.30', change: '-420%' },
+  ]
+
+  const handleInstallClick = () => {
+    setShowPopup(false);
+    setShowInstallWindow(true);
+  };
+
+  const handleComputerClick = () => {
+    setShowInstallWindow(true);
+    setActiveWindow(null);
+  };
+
+  const handleNewsClick = () => {
+    window.open('https://x.com/MCAIFEESOL/status/1857920456210129373', '_blank');
+  };
+
+  return (
+    <div className="min-h-screen bg-[#008080] flex flex-col">
+      <Head>
+        <link href="https://fonts.googleapis.com/css2?family=VT323&display=swap" rel="stylesheet" />
+      </Head>
+      <div className="flex-1 relative" style={{ height: 'calc(100vh - 48px)' }}>
+        <div className="absolute left-0 top-0 w-[140px] p-2">
+          <div className="grid grid-cols-1 gap-4">
+            <DesktopIcon 
+              icon="/icons/my-computer.ico"
+              label="My Computer"
+              onClick={handleComputerClick}
+              isActive={activeWindow === 'computer'}
             />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:min-w-44"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
+            <DesktopIcon 
+              icon="/icons/x.ico"
+              label="News"
+              onClick={handleNewsClick}
+              isActive={activeWindow === 'news'}
+            />
+          </div>
         </div>
-      </main>
-      <footer className="row-start-3 flex gap-6 flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
+        {showPopup && (
+          <Window
+            title="Warning.exe"
+            onClose={() => setShowPopup(false)}
+            onMinimize={() => setShowPopup(false)}
+            className="w-[400px] h-[200px] absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2"
+          >
+            <div className="p-4 font-['MS_Sans_Serif'] ">
+              <p className="text-sm mb-4">WARNING: Clicking random memes may lead to instant regret. Get McAifee before getting Whackd!</p>
+              <button 
+                className="win95-button px-4 py-1 flex items-center justify-center w-full"
+                onClick={handleInstallClick}
+              >
+                $WHACKD
+              </button>
+            </div>
+          </Window>
+        )}
+
+        {showInstallWindow && (
+          <Window
+            title="McAifee Installation"
+            onClose={() => setShowInstallWindow(false)}
+            onMinimize={() => setShowInstallWindow(false)}
+            className="w-[500px] h-[300px] absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2"
+          >
+            <div className="p-4 font-['MS_Sans_Serif']">
+              <div className="mb-4 flex flex-col ">
+                <p className="text-sm mb-2">Rumors says he is back…</p>
+                <div className="w-full h-5 border border-[#808080] border-r-[#FFFFFF] border-b-[#FFFFFF] bg-[#C0C0C0] p-[2px] mt-2">
+                  <div className="h-full bg-[#000080]" style={{width: '45%'}}></div>
+                </div>
+                <p className="text-sm text-gray-600 py-2">CA: GSjgSTYChZr6JvKKKQEMhZHZBfe1iMfuEyh4Xk2Fpump</p>
+              <a href="https://x.com/MCAIFEESOL/status/1857920456210129373" target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline">
+                X/Twitter
+              </a>
+              <a href="https://t.me/JohnMcAifee" target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline">
+                Telegram
+              </a>
+              <a href="https://dexscreener.com/solana/Gir3ea5cyVrCsmS1aBY51rhA1QKRh7ZN4DhgmJ4di76g" target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline">
+                Dexscreener
+              </a>
+              </div>
+              <p className="text-sm text-gray-600">Please wait while the installation completes...</p>
+            </div>
+            
+          </Window>
+          
+        )}
+      </div>
+      <div className="">
+        <div className="fixed bottom-0 left-0 right-0 h-10 bg-[#c0c0c0] shadow-[inset_-1px_-1px_#0a0a0a,inset_1px_1px_#dfdfdf] flex items-center px-2">
+          <button className="win95-button px-4 py-1 mr-2">
+            Start
+          </button>
+          <div className="win95-taskbar-divider mx-2" />
+    
+          <div className="flex-1 flex items-center space-x-4 overflow-x-auto px-2 font-['VT323']">
+            {stockTickers.map((stock, index) => (
+              <div key={stock.symbol} className="flex items-center space-x-1 min-w-fit">
+                <span className="font-bold">{stock.symbol}</span>
+                <span>${stock.price}</span>
+                <span className={stock.change.startsWith('+') ? 'text-green-600' : 'text-red-600'}>
+                  {stock.change}
+                </span>
+                {index < stockTickers.length - 1 && <div className="win95-taskbar-divider mx-2" />}
+              </div>
+            ))}
+          </div>
+          <div className="win95-button px-3 py-1 min-w-[100px] text-center font-['VT323']">
+            {currentTime}
+          </div>
+        </div>
+      </div>
     </div>
-  );
-}
+  )
+} 
