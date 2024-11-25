@@ -4,8 +4,7 @@ import Head from 'next/head'
 import { useState, useEffect } from 'react'
 import DesktopIcon from '../../components/DesktopIcon'
 import Window from '../../components/Window'
-import StockContent from '../../components/StockContent'
-import NewsContent from '../../components/NewsContent'
+
 
 export default function Home() {
   const [activeWindow, setActiveWindow] = useState(null)
