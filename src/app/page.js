@@ -59,11 +59,22 @@ export default function Home() {
     window.open('https://x.com/MCAIFEESOL/status/1857920456210129373', '_blank');
   };
 
+  const handleTelegramClick = () => {
+    window.open('https://t.me/+XHVZTOHBrnk3NDY5', '_blank');
+  };
+
+  const handleDexscreenerClick = () => {
+    window.open('https://dexscreener.com/solana/Gir3ea5cyVrCsmS1aBY51rhA1QKRh7ZN4DhgmJ4di76g', '_blank');
+  };
+
   return (
     <div className="min-h-screen bg-[#008080] flex flex-col">
       <Head>
         <link href="https://fonts.googleapis.com/css2?family=VT323&display=swap" rel="stylesheet" />
       </Head>
+      <p className="fixed bottom-14 right-8 text-sm text-gray-800">
+        Please Activate: <br/> <span className="font-bold">GSjgSTYChZr6JvKKKQEMhZHZBfe1iMfuEyh4Xk2Fpump</span>
+      </p>
       <div className="flex-1 relative" style={{ height: 'calc(100vh - 48px)' }}>
         <div className="absolute left-0 top-0 w-[140px] p-2">
           <div className="grid grid-cols-1 gap-4">
@@ -79,6 +90,18 @@ export default function Home() {
               onClick={handleNewsClick}
               isActive={activeWindow === 'news'}
             />
+            <DesktopIcon 
+              icon="/icons/telegram.ico"
+              label="Telegram"
+              onClick={handleTelegramClick}
+              isActive={activeWindow === 'telegram'}
+            />
+            <DesktopIcon 
+              icon="/icons/dexscreener.ico"
+              label="Dexscreener"
+              onClick={handleDexscreenerClick}
+              isActive={activeWindow === 'dexscreener'}
+            />
           </div>
         </div>
         {showPopup && (
@@ -88,14 +111,19 @@ export default function Home() {
             onMinimize={() => setShowPopup(false)}
             className="w-[400px] h-[200px] absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2"
           >
-            <div className="p-4 font-['MS_Sans_Serif'] ">
-              <p className="text-sm mb-4">WARNING: Clicking random memes may lead to instant regret. Get McAifee before getting Whackd!</p>
-              <button 
-                className="win95-button px-4 py-1 flex items-center justify-center w-full"
-                onClick={handleInstallClick}
-              >
-                $WHACKD
-              </button>
+            <div className=" font-['MS_Sans_Serif']">
+              <div className="flex">
+                <img src="/icons/warning.ico" alt="warning" className="w-20 h-20" />
+                <p className="p-2 text-sm mb-4">WARNING: Clicking random memes may lead to instant regret. Get McAifee before getting Whackd!</p>
+              </div>
+              <div className="flex justify-center">
+                <button 
+                  className="win95-button px-8 py-1 flex items-center justify-center"
+                  onClick={handleInstallClick}
+                >
+                  $WHACKD
+                </button>
+              </div>
             </div>
           </Window>
         )}
@@ -131,9 +159,10 @@ export default function Home() {
           
         )}
       </div>
+     
       <div className="">
         <div className="fixed bottom-0 left-0 right-0 h-10 bg-[#c0c0c0] shadow-[inset_-1px_-1px_#0a0a0a,inset_1px_1px_#dfdfdf] flex items-center px-2">
-          <button className="win95-button px-4 py-1 mr-2">
+          <button className="win95-button px-4 py-1 mr-2" onClick={() => setShowInstallWindow(true)}>
             Start
           </button>
           <div className="win95-taskbar-divider mx-2" />
