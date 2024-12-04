@@ -56,7 +56,7 @@ export default function Home() {
   };
 
   const handleNewsClick = () => {
-    window.open('https://x.com/MCAIFEESOL/status/1857920456210129373', '_blank');
+    window.open('https://x.com/whackdon_sol', '_blank');
   };
 
   const handleTelegramClick = () => {
@@ -114,7 +114,7 @@ export default function Home() {
             <div className=" font-['MS_Sans_Serif']">
               <div className="flex">
                 <img src="/icons/warning.ico" alt="warning" className="w-20 h-20" />
-                <p className="p-2 text-sm mb-4">WARNING: Clicking random memes may lead to instant regret. Get McAifee before getting Whackd!</p>
+                <p className="p-2 text-sm mb-4">WARNING: Clicking random memes may lead to instant regret. Get McAfee before getting Whackd!</p>
               </div>
               <div className="flex justify-center">
                 <button 
@@ -142,10 +142,10 @@ export default function Home() {
                   <div className="h-full bg-[#000080]" style={{width: '45%'}}></div>
                 </div>
                 <p className="text-sm text-gray-600 py-2">CA: GSjgSTYChZr6JvKKKQEMhZHZBfe1iMfuEyh4Xk2Fpump</p>
-              <a href="https://x.com/MCAIFEESOL/status/1857920456210129373" target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline">
+              <a href="https://x.com/whackdon_sol" target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline">
                 X/Twitter
               </a>
-              <a href="https://t.me/JohnMcAifee" target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline">
+              <a href="https://t.me/+XHVZTOHBrnk3NDY5" target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline">
                 Telegram
               </a>
               <a href="https://dexscreener.com/solana/Gir3ea5cyVrCsmS1aBY51rhA1QKRh7ZN4DhgmJ4di76g" target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline">
